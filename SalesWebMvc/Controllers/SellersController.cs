@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
+using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
 {
@@ -8,18 +11,17 @@ namespace SalesWebMvc.Controllers
     {
 
 
-        private readonly SalesWebMvcContext _context;
+        private readonly SellerService _context;
 
         // 2. Construtor para injetar a dependência
-        public SellersController(SalesWebMvcContext context)
+        public SellersController(SellerService context)
         {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            // 3. Buscar todos os vendedores do banco e passar para a View
-            var list = _context.Seller.ToList();
+            var list = _context.FindAll();
             return View(list);
         }
     }
