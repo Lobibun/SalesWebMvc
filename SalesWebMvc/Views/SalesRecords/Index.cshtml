@@ -3,7 +3,7 @@
 }
 
 <style>
-
+    /* Estilos específicos para esta página */
     .custom-search-card {
         border: 1px solid #3498db;
         border-radius: 6px;
@@ -38,6 +38,23 @@
         color: white;
     }
 
+    /* Estilo do botão de nova venda para combinar com o sistema */
+    .btn-create {
+        background-color: #27ae60; /* Verde para destacar 'Novo' */
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+        .btn-create:hover {
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+        }
+
     .btn-submit {
         background-color: #3498db;
         border: none;
@@ -54,6 +71,14 @@
 </style>
 
 <h2>@ViewData["Title"]</h2>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-12">
+        <a asp-action="Create" class="btn-create">
+            <i class="glyphicon glyphicon-plus"></i> Record New Sale
+        </a>
+    </div>
+</div>
 
 <div class="row" style="margin-top: 30px;">
     <div class="col-md-6">

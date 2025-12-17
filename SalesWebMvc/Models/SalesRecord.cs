@@ -12,7 +12,8 @@ namespace SalesWebMvc.Models
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public float Amount { get; set; }
         public SaleStatus Status { get; set; }
-        public Seller Seller { get; set; }
+        public Seller? Seller { get; set; }
+        public int SellerId { get; set; }
 
         public SalesRecord () { }
 
