@@ -1,35 +1,129 @@
 ﻿@model IEnumerable<SalesWebMvc.Models.Department>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Departments";
 }
 
-<h1>Index</h1>
+<style>
+    /* Estilo do Card com borda azul fina */
+    .custom-table-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: transparent;
+        margin-top: 20px;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    /* Barra de título do card */
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Tabela Profissional */
+    .table-custom {
+        margin-bottom: 0 !important;
+    }
+
+        .table-custom thead tr {
+            background-color: #1a252f !important;
+            color: #ffffff !important;
+        }
+
+        .table-custom thead th {
+            border: none !important;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            padding: 15px !important;
+            border-bottom: 2px solid #3498db !important;
+        }
+
+        /* Linhas da Tabela */
+        .table-custom tbody td {
+            border-top: 1px solid #2c3e50 !important;
+            padding: 12px !important;
+            vertical-align: middle !important;
+            color: #ecf0f1;
+        }
+
+    /* Links de Ação (Edit, Details, Delete) */
+    .action-link {
+        color: #3498db;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 0 5px;
+        font-size: 12px;
+        transition: color 0.2s;
+    }
+
+        .action-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+    .delete-link {
+        color: #e74c3c; /* Vermelho para exclusão */
+    }
+
+        .delete-link:hover {
+            color: #ff7675;
+        }
+
+    .btn-create {
+        background-color: #2980b9; 
+        border: 1px solid #ffffff; 
+        color: white !important;
+        padding: 6px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.3s;
+    }
+
+        .btn-create:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="custom-table-card">
+    <div class="card-header-blue">
+        <span>Registered Departments</span>
+        <a asp-action="Create" class="btn-create">Create New</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-custom">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th style="width: 200px;" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-size: 15px;">
+                            <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="action-link">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="action-link">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="action-link delete-link">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -3,16 +3,57 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SalesWebMvc</title>
+    <title>@ViewData["Title"] - Nexus Sales Analytics</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-Darkly.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SalesWebMvc.styles.css" asp-append-version="true" />
+
+    <style>
+        /* Ajustes na Navbar para o padrão Blue & Black */
+        .navbar-custom {
+            background-color: #1a252f !important; /* Azul bem escuro/preto */
+            border-bottom: 2px solid #3498db !important; /* Linha azul de assinatura */
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: #3498db !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-link {
+            color: #ecf0f1 !important;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin: 0 10px;
+        }
+
+            .nav-link:hover {
+                color: #3498db !important;
+            }
+
+        /* Ajuste do Footer */
+        .footer-custom {
+            background-color: #1a252f;
+            border-top: 1px solid #2c3e50;
+            color: #95a5a6;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        .footer-brand {
+            color: #3498db;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-custom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SalesWebMvc</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Nexus Sales</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,38 +61,35 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-controller="Departments" asp-action="Index">Departments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                            <a class="nav-link" asp-controller="Sellers" asp-action="Index">Sellers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sellers" asp-action="Index">Sellers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SalesRecords" asp-action="Index">Sales</a>
+                            <a class="nav-link" asp-controller="SalesRecords" asp-action="Index">Sales Records</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer-custom text-center">
         <div class="container">
-            &copy; 2025 - SalesWebMvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - <span class="footer-brand">Nexus Sales Analytics</span> - High Performance ERP
         </div>
-        
-
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

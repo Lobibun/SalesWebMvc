@@ -1,7 +1,134 @@
-﻿
+﻿@model IEnumerable<IGrouping<Department, SalesRecord>>
+
 @{
-    ViewData["Title"] = "GroupingSearch";
+    ViewData["Title"] = "Grouping Search";
+    DateTime minDate = DateTime.Parse(ViewData["minDate"] as string);
+    DateTime maxDate = DateTime.Parse(ViewData["maxDate"] as string);
 }
 
-<h1>GroupingSearch</h1>
+<style>
+    /* 1. Alinhamento dos Filtros Lado a Lado */
+    .filter-container {
+        display: flex;
+        align-items: flex-end;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
 
+    /* 2. Card com Borda Azul Fina (Mesmo padrão da busca simples) */
+    .custom-table-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: transparent;
+        margin-bottom: 30px; /* Espaço entre os departamentos */
+        box-shadow: none;
+    }
+
+    /* 3. Barra de Título do Departamento */
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    /* 4. Cabeçalho da Tabela Profissional (Midnight Blue) */
+    .table-custom {
+        margin-bottom: 0 !important;
+    }
+
+        .table-custom thead tr {
+            background-color: #1a252f !important;
+            color: #ffffff !important;
+        }
+
+        .table-custom thead th {
+            border: none !important;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            padding: 12px !important;
+            border-bottom: 2px solid #3498db !important;
+        }
+
+        /* 5. Linhas e Formatação de Valores */
+        .table-custom tbody td {
+            border-top: 1px solid #2c3e50 !important;
+            padding: 10px !important;
+            vertical-align: middle !important;
+            color: #ecf0f1;
+        }
+
+    .amount-highlight {
+        color: #3498db;
+        font-weight: bold;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<h2>@ViewData["Title"]</h2>
+
+<nav class="navbar navbar-inverse" style="border: none; border-radius: 4px;">
+    <div class="container-fluid" style="padding: 15px;">
+        <form class="navbar-form" role="search">
+            <div class="filter-container">
+                <div class="form-group">
+                    <label style="display:block; color: #bdc3c7; font-size: 12px; margin-bottom: 4px;">Min Date</label>
+                    <input type="date" class="form-control" name="minDate" value=@ViewData["minDate"]>
+                </div>
+                <div class="form-group">
+                    <label style="display:block; color: #bdc3c7; font-size: 12px; margin-bottom: 4px;">Max Date</label>
+                    <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"]>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: #3498db; border: none;">Filter</button>
+            </div>
+        </form>
+    </div>
+</nav>
+
+@foreach (var departmentGroup in Model)
+{
+    <div class="custom-table-card">
+        <div class="card-header-blue">
+            Department: <strong>@departmentGroup.Key.Name</strong> |
+            Total sales: <strong>@departmentGroup.Key.TotalSales(minDate, maxDate).ToString("N2")</strong>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-custom">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="text-right">Amount</th>
+                        <th>Seller</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in departmentGroup)
+                    {
+                        <tr>
+                            <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                            <td class="text-right amount-highlight">
+                                @item.Amount.ToString("N2")
+                            </td>
+                            <td><strong>@item.Seller.Name</strong></td>
+                            <td class="text-center">
+                                @item.Status
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

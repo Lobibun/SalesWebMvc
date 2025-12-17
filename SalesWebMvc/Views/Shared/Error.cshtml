@@ -1,16 +1,108 @@
 ﻿@using SalesWebMvc.Models.ViewModels
 @model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "System Error";
 }
 
-<h1 class="text-danger">@ViewData["Title"].</h1>
-<h2 class="text-danger">@Model.Message</h2>
+<style>
+    /* Centralização do Card de Erro */
+    .error-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+    }
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+    .custom-error-card {
+        border: 1px solid #e74c3c;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
 
+    /* Cabeçalho Vermelho para Erro */
+    .card-header-red {
+        background-color: #e74c3c;
+        color: white;
+        padding: 15px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+    }
+
+    .card-body-custom {
+        padding: 30px;
+        background-color: rgba(44, 19, 19, 0.4); /* Tom avermelhado bem sutil no fundo escuro */
+        text-align: center;
+    }
+
+    .error-message {
+        color: #ff7675;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .request-id-box {
+        background-color: #1a1a1a;
+        border: 1px solid #2c3e50;
+        padding: 10px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+        .request-id-box code {
+            color: #3498db;
+            font-size: 14px;
+        }
+
+    .btn-return {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 25px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+
+        .btn-return:hover {
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+        }
+</style>
+
+<div class="error-wrapper">
+    <div class="custom-error-card">
+        <div class="card-header-red">
+            <span style="margin-right: 10px;">⚠️</span> Critical Error
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="error-message">@Model.Message</h2>
+
+            @if (Model.ShowRequestId)
+            {
+                <p style="color: #bdc3c7; margin-bottom: 5px;">Traceability ID for Support:</p>
+                <div class="request-id-box">
+                    <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                </div>
+            }
+
+            <div class="text-center">
+                <p style="color: #95a5a6; margin-top: 20px; font-size: 14px;">
+                    An unexpected behavior occurred. If this persists, contact the system administrator.
+                </p>
+                <a href="javascript:history.back()" class="btn-return">← Go Back to Safety</a>
+            </div>
+        </div>
+    </div>
+</div>

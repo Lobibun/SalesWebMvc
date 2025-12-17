@@ -1,49 +1,95 @@
 ﻿@model SalesWebMvc.Models.Seller
+
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Seller Profile";
 }
 
-<h2>ViewData["Title"]</h2>
-<div>
-    <h4>Seller</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+<style>
+    .details-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BaseSalary)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BaseSalary)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
-        </dd>
-    </dl>
+    .custom-details-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 20px;
+        font-weight: bold;
+    }
+
+    .card-body-custom {
+        padding: 25px;
+        background-color: rgba(26, 37, 47, 0.4);
+    }
+
+    .info-group {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #2c3e50;
+        padding-bottom: 10px;
+    }
+
+    .info-label {
+        color: #3498db;
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .info-value {
+        color: white;
+        font-size: 16px;
+        display: block;
+    }
+
+    .btn-edit {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+</style>
+
+<div class="details-wrapper">
+    <div class="custom-details-card">
+        <div class="card-header-blue">Detailed Information</div>
+        <div class="card-body-custom">
+            <div class="info-group">
+                <span class="info-label">Name</span>
+                <span class="info-value">@Model.Name</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Email</span>
+                <span class="info-value">@Model.Email</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Birth Date</span>
+                <span class="info-value">@Model.BirthDate.ToString("dd/MM/yyyy")</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Base Salary</span>
+                <span class="info-value" style="color: #3498db; font-weight: bold;">@Model.BaseSalary.ToString("N2")</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Department</span>
+                <span class="info-value">@Model.Department.Name</span>
+            </div>
+
+            <div class="text-center" style="margin-top: 25px;">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Edit Seller</a>
+                <br><br>
+                <a asp-action="Index" style="color: #95a5a6; font-size: 13px;">Back to List</a>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-defaut">Edit</a>
-        <a asp-action="Index">Back to list</a>
-
-    </div>
+</div>

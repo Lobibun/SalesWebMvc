@@ -1,45 +1,145 @@
 ﻿@model SalesWebMvc.Models.ViewModels.SellerFormViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Update Seller Info";
 }
 
-<h1>@ViewData["Title"]</h1>
+<style>
+    /* 1. Centralização e Layout do Card */
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
 
-<h4>Seller</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <input type="hidden" asp-for="Seller.Id" />
-            <div class="form-group">
-                <label asp-for="Seller.Name" class="control-label"></label>
-                <input asp-for="Seller.Name" class="form-control" />
-                <span asp-validation-for="Seller.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seller.Email" class="control-label"></label>
-                <input asp-for="Seller.Email" class="form-control" />
-                <span asp-validation-for="Seller.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seller.BirthDate" class="control-label"></label>
-                <input asp-for="Seller.BirthDate" class="form-control" />
-                <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seller.BaseSalary" class="control-label"></label>
-                <input asp-for="Seller.BaseSalary" class="form-control" />
-                <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Seller.DepartmentId" class="control-label"></label>
-                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments,"Id", "Name"))" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+    .custom-form-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 600px;
+        background-color: transparent;
+    }
+
+    /* 2. Cabeçalho Azul */
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .card-body-custom {
+        padding: 25px;
+        background-color: rgba(26, 37, 47, 0.4);
+    }
+
+    /* 3. Estilização dos Inputs (O "Padrão Dark") */
+    .control-label {
+        color: #bdc3c7;
+        font-size: 12px;
+        margin-bottom: 5px;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .form-control {
+        background-color: #2c3e50;
+        border: 1px solid #34495e;
+        color: white;
+        height: 40px;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            background-color: #2c3e50;
+            color: white;
+            box-shadow: none;
+        }
+
+    /* Ajuste para o Dropdown */
+    select.form-control option {
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    /* 4. Botão e Links */
+    .btn-save {
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 12px;
+        font-weight: bold;
+        width: 100%;
+        text-transform: uppercase;
+        margin-top: 20px;
+        transition: background 0.3s;
+    }
+
+        .btn-save:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+    .back-link {
+        display: block;
+        margin-top: 15px;
+        color: #95a5a6;
+        text-decoration: none;
+        font-size: 13px;
+        text-align: center;
+    }
+
+        .back-link:hover {
+            color: #3498db;
+        }
+</style>
+
+<div class="form-wrapper">
+    <div class="custom-form-card">
+        <div class="card-header-blue">Edit Seller Profile</div>
+
+        <div class="card-body-custom">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Seller.Id" />
+
+                <div class="form-group">
+                    <label asp-for="Seller.Name" class="control-label">Full Name</label>
+                    <input asp-for="Seller.Name" class="form-control" />
+                    <span asp-validation-for="Seller.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Seller.Email" class="control-label">Email Address</label>
+                    <input asp-for="Seller.Email" class="form-control" />
+                    <span asp-validation-for="Seller.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Seller.BirthDate" class="control-label">Birth Date</label>
+                    <input asp-for="Seller.BirthDate" class="form-control" type="date" />
+                    <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Seller.BaseSalary" class="control-label">Base Salary</label>
+                    <input asp-for="Seller.BaseSalary" class="form-control" />
+                    <span asp-validation-for="Seller.BaseSalary" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Seller.DepartmentId" class="control-label">Department</label>
+                    <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))" class="form-control"></select>
+                </div>
+
+                <button type="submit" class="btn btn-save">Save Changes</button>
+            </form>
+
+            <a asp-action="Index" class="back-link">← Cancel and Back to List</a>
+        </div>
     </div>
 </div>
 

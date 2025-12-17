@@ -1,47 +1,51 @@
 ﻿@model SalesWebMvc.Models.Seller
+
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Terminating Seller";
 }
 
-<h2>ViewData["Title"]</h2>
+<style>
+    .delete-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
 
-<h3>Are your sure you want to delete this?</h3>
+    .custom-delete-card {
+        border: 1px solid #e74c3c;
+        border-radius: 6px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 500px;
+    }
 
-<div>
-    <h4>Seller</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    .card-header-red {
+        background-color: #e74c3c;
+        color: white;
+        padding: 12px 20px;
+        font-weight: bold;
+        text-align: center;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BaseSalary)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BaseSalary)
-        </dd>
-    </dl>
+    .card-body-custom {
+        padding: 25px;
+        background-color: rgba(44, 19, 19, 0.4);
+        text-align: center;
+    }
+</style>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="delete-wrapper">
+    <div class="custom-delete-card">
+        <div class="card-header-red">Confirm Seller Deletion</div>
+        <div class="card-body-custom">
+            <p style="color: #ff7675; font-weight: bold;">Are you sure you want to remove this employee?</p>
+            <h3 style="color: white; margin-bottom: 30px;">@Model.Name</h3>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger" style="width: 100%; font-weight: bold; padding: 12px;">Yes, Remove Seller</button>
+            </form>
+            <a asp-action="Index" style="display: block; margin-top: 15px; color: #95a5a6;">No, Keep it</a>
+        </div>
+    </div>
 </div>
-

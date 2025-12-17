@@ -1,34 +1,126 @@
 ﻿@model SalesWebMvc.Models.Department
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Department";
 }
 
-<h1>Edit</h1>
+<style>
+    /* Container centralizado para o formulário */
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
 
-<h4>Department</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+    /* Card com o padrão azul e preto */
+    .custom-form-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: transparent;
+        width: 100%;
+        max-width: 500px; /* Largura controlada para não espalhar na tela */
+        box-shadow: none;
+    }
+
+    /* Barra de título azul */
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .card-body-custom {
+        padding: 25px;
+        background-color: rgba(26, 37, 47, 0.4); /* Fundo levemente mais escuro que o geral */
+    }
+
+    /* Estilização dos Labels e Inputs */
+    .control-label {
+        color: #bdc3c7;
+        font-size: 13px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        background-color: #2c3e50;
+        border: 1px solid #34495e;
+        color: white;
+        border-radius: 4px;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: none;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+    /* Botões */
+    .btn-save {
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+        .btn-save:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 15px;
+        color: #95a5a6;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+        .back-link:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+</style>
+
+<div class="form-wrapper">
+    <div class="custom-form-card">
+        <div class="card-header-blue">
+            Edit Department Details
+        </div>
+
+        <div class="card-body-custom">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Department Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter department name" />
+                    <span asp-validation-for="Name" class="text-danger" style="font-size: 12px;"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 25px; margin-bottom: 0;">
+                    <input type="submit" value="Save Changes" class="btn btn-save btn-block" />
+                </div>
+            </form>
+
+            <div class="text-center">
+                <a asp-action="Index" class="back-link">← Back to Departments List</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

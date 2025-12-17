@@ -1,33 +1,129 @@
 ﻿@model SalesWebMvc.Models.Department
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Department";
 }
 
-<h1>Create</h1>
+<style>
+    /* Centralização do Card na tela */
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
 
-<h4>Department</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+    /* Card com borda azul fina padrão */
+    .custom-form-card {
+        border: 1px solid #3498db;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: transparent;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: none;
+    }
+
+    /* Cabeçalho Azul */
+    .card-header-blue {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .card-body-custom {
+        padding: 25px;
+        background-color: rgba(26, 37, 47, 0.4);
+    }
+
+    /* Labels e Inputs customizados */
+    .control-label {
+        color: #bdc3c7;
+        font-size: 13px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        background-color: #2c3e50;
+        border: 1px solid #34495e;
+        color: white;
+        border-radius: 4px;
+        height: 45px;
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: none;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+    /* Botão de Ação Principal */
+    .btn-create {
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 100%;
+        margin-top: 10px;
+        transition: background 0.3s;
+    }
+
+        .btn-create:hover {
+            background-color: #2980b9;
+            color: white;
+        }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #95a5a6;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+        .back-link:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+</style>
+
+<div class="form-wrapper">
+    <div class="custom-form-card">
+        <div class="card-header-blue">
+            Create New Department
+        </div>
+
+        <div class="card-body-custom">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Department Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Ex: Electronics, Fashion..." />
+                    <span asp-validation-for="Name" class="text-danger" style="font-size: 12px;"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-create">Register Department</button>
+                </div>
+            </form>
+
+            <div class="text-center">
+                <a asp-action="Index" class="back-link">← Back to Departments List</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
